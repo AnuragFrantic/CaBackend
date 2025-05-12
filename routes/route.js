@@ -10,11 +10,13 @@ const { createContact, getAllContacts, getContactById, updateContact, deleteCont
 const { createService, getAllServices, getServiceById, updateService, deleteService } = require('../controller/Service');
 const { createServiceDetail, getAllServiceDetails, getServiceDetailById, updateServiceDetail, deleteServiceDetail, getServiceDetailsByService, getServiceDetailByUrl } = require('../controller/ServiceDetail');
 const { createRegulatory, getAllRegulatory, getRegulatoryById, updateRegulatory, deleteRegulatory } = require('../controller/Regulatory');
-const { createRegulatoryDetail, getAllRegulatoryDetails, getRegulatoryDetailById, updateRegulatoryDetail, deleteRegulatoryDetail } = require('../controller/RegulatoryDetail');
+const { createRegulatoryDetail, getAllRegulatoryDetails, getRegulatoryDetailById, updateRegulatoryDetail, deleteRegulatoryDetail, getRegDetailByService, getRegDetialByUrl } = require('../controller/RegulatoryDetail');
 const { createWeServe, getAllWeServe, getWeServeById, updateWeServe, deleteWeServe } = require('../controller/WeServe');
 const { createWeDo, getAllWeDo, getWeDoById, updateWeDo, deleteWeDoPermanent } = require('../controller/WeDoController');
 const { createTestimonial, getAllTestimonials, getTestimonialById, updateTestimonial, deleteTestimonial } = require('../controller/Testimonial');
 const { createOrUpdatePolicy, getAllPolicies, getPolicyByUrl, softDeletePolicy, permanentDeletePolicy } = require('../controller/PolicyController');
+const { createBlog, getAllBlogs, getBlogById, updateBlog, deleteBlog, getBlogByurl } = require('../controller/Blogs');
+const { createAbout, getAllAboutUs, updateAbout, deleteAbout } = require('../controller/AboutusController');
 
 
 const router = express.Router();
@@ -96,6 +98,10 @@ router.get("/reg_detail", getAllRegulatoryDetails);
 router.get("/reg_detail/:id", getRegulatoryDetailById);
 router.put("/reg_detail/:id", upload.single("image"), updateRegulatoryDetail);
 router.delete("/reg_detail/:id", deleteRegulatoryDetail);
+router.get('/reg-detail/by-service/:reg_id', getRegDetailByService);
+router.get("/regulatory_detail_url/:url", getRegDetialByUrl);
+
+
 
 
 
@@ -147,6 +153,24 @@ router.get("/policy", getAllPolicies);
 router.get("/policy/:url", getPolicyByUrl);
 router.delete("/delete_policy/:id", permanentDeletePolicy);
 
+
+// blogs
+
+router.post("/blogs", upload.single("image"), createBlog);
+router.get("/blogs", getAllBlogs);
+router.get("/blogs/:id", getBlogById);
+router.get("/blogs_by_url/:url", getBlogByurl);
+router.put("/blogs/:id", upload.single("image"), updateBlog);
+router.delete("/blogs/:id", deleteBlog);
+
+
+// about us
+
+
+router.post("/about", upload.single("image"), createAbout);
+router.get("/about", getAllAboutUs);
+router.put("/about/:id", upload.single("image"), updateAbout);
+router.delete("/about/:id", deleteAbout);
 
 
 

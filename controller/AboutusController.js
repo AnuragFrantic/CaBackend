@@ -3,7 +3,7 @@ const AboutUs = require('../models/AboutUs')
 
 exports.createAbout = async (req, res) => {
     try {
-        const data = req.body; 
+        const data = req.body;
         if (req.file) {
             data.image = req.file.path;
         }
@@ -19,12 +19,13 @@ exports.createAbout = async (req, res) => {
 
 exports.getAllAboutUs = async (req, res) => {
     try {
-        const about = await AboutUs.find();
+        const about = await AboutUs.find().sort({ position: 1 }); // Ascending order
         res.status(200).json({ data: about, error: 0, message: "Fetch All About Us" });
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(500).json({ message: error.message, error: 1 });
     }
 };
+
 
 
 exports.updateAbout = async (req, res) => {

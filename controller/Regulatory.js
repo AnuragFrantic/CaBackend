@@ -59,12 +59,12 @@ exports.updateRegulatory = async (req, res) => {
         );
 
         if (!regulatory) {
-            return res.status(404).json({ message: "Regulatory entry not found" });
+            return res.status(404).json({ message: "Regulatory entry not found", error: 1 });
         }
 
-        res.status(200).json({ message: "Regulatory entry updated successfully", data: regulatory });
+        res.status(200).json({ message: "Regulatory entry updated successfully", data: regulatory, error: 0 });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ message: error.message, error: 1 });
     }
 };
 
