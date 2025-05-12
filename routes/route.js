@@ -54,8 +54,8 @@ router.get('/profile', verifyToken, getProfile);
 router.post('/banners', upload.single('image'), createBanner);
 router.get('/banners', getAllBanners);
 router.get('/banners/:id', getBannerById);
-router.put('/banners/:id', upload.single('image'), updateBanner);
-router.delete('/banners/:id', deleteBanner);
+router.put('/update_banners/:id', upload.single('image'), updateBanner);
+router.delete('/delete_banners/:id', deleteBanner);
 
 
 

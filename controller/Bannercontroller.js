@@ -35,11 +35,11 @@ exports.getBannerById = async (req, res) => {
         const { id } = req.params;
         const banner = await Banner.findById(id);
         if (!banner) {
-            return res.status(404).json({ message: "Banner not found" });
+            return res.status(404).json({ message: "Banner not found", error: 1 });
         }
-        res.status(200).json(banner);
+        res.status(200).json({ data: banner, error: 0 });
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(500).json({ message: error.message, error: 1 });
     }
 };
 
@@ -56,12 +56,12 @@ exports.updateBanner = async (req, res) => {
 
         const banner = await Banner.findByIdAndUpdate(id, updatedData, { new: true });
         if (!banner) {
-            return res.status(404).json({ message: "Banner not found" });
+            return res.status(404).json({ message: "Banner not found", error: 1 });
         }
 
-        res.status(200).json({ message: "Banner updated successfully", banner });
+        res.status(200).json({ message: "Banner updated successfully", banner, error: 0 });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ message: error.message, error: 1 });
     }
 };
 
@@ -71,11 +71,11 @@ exports.deleteBanner = async (req, res) => {
         const { id } = req.params;
         const banner = await Banner.findByIdAndDelete(id);
         if (!banner) {
-            return res.status(404).json({ message: "Banner not found" });
+            return res.status(404).json({ message: "Banner not found", error: 1 });
         }
 
-        res.status(200).json({ message: "Banner deleted successfully" });
+        res.status(200).json({ message: "Banner deleted successfully", error: 0 });
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(500).json({ message: error.message, error: 1 });
     }
 };
